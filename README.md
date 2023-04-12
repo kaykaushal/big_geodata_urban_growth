@@ -1,4 +1,4 @@
-# Databricks Project Template
+# Spark based Geospatial Project
 
 This project template is designed to facilitate the development, testing, and deployment of Apache Spark Data Engineering pipelines across environments from local development using your preferred IDE to deployment on your Databricks cluster.
 
