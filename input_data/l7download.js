@@ -2,7 +2,7 @@
 //give respective filters
 //use boundary to clip data
 
-var boundary = ee.FeatureCollection("users/sreeharikollamattam/pune_dist");
+var boundary = ee.FeatureCollection("users/sreeharikollamattam/ekm_dist");
 
 var dataset_2002 = ee.ImageCollection('LANDSAT/LE07/C02/T1_L2')
     .filterDate('2012-01-01', '2012-12-31')
