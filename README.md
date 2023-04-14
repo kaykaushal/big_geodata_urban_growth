@@ -2,6 +2,8 @@
 
 This project is designed to facilitate the big geodata solution developmen and deployment for urrban growth change mapping using GIS, Remote Sensing and Databricks ecosystem.This repository contains a comprehensive set of instruction and workflow to set up the big geodata solution on cloud or docker.
 
+- Web app: <https://streamlit.geemap.org>
+- Source code: <https://github.com/kaykaushal/big_geodata_urban_growth>
 
 ## Project workflow and technology stack
 
