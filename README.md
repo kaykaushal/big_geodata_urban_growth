@@ -1,14 +1,17 @@
-# Spark based Geospatial Project
+# Analysis of urban growth using decadal remote sensing data
 
-This project template is designed to facilitate the development, testing, and deployment of Apache Spark Data Engineering pipelines across environments from local development using your preferred IDE to deployment on your Databricks cluster.
+This project is designed to facilitate the big geodata solution developmen and deployment for urrban growth change mapping using GIS, Remote Sensing and Databricks ecosystem.This repository contains a comprehensive set of instruction and workflow to set up the big geodata solution on cloud or docker.
+
+
+## Project workflow and technology stack
+
 
 ## Project Structure
 
 This project has the following structure to a depth of 2.
 
 ```
-.
-├── Makefile
+
 ├── README.md
 ├── docker-compose.yml
 ├── env
@@ -25,7 +28,6 @@ This project has the following structure to a depth of 2.
     └── spark
 ```
 
-- **`Makefile`** - defines common commands to be executed on the repo, including launching a local development server and running tests.
 - **`doc`** - contains documentation associated with this project
 - **`docker-compose.yml`** - defines the local development docker services
 - **`env/docker`** - contains the `Dockerfile` and `requirements.txt` used to define the Python environment for local development
@@ -38,21 +40,7 @@ This project has the following structure to a depth of 2.
 
 ## Development
 
-### Launch Local Development Server
-
-Local development is facilitated by Docker and Docker Compose and built as an extension to the `jupyter/pyspark-notebook` docker image.
-
-To begin developing, start the development server using the following command:
-
-```
-make launch-test-server
-```
-
-This will launch a local single-node spark cluster. The password is `"local spark cluster"`.
-
-This cluster can be interacted with using Jupyter Labs at [localhost:10000](localhost:10000).
-
-The cluster is used for running local tests against the pyspark package being developed.
+Databricks cluster creation and pipeline setup in aws.
 
 ### Running Tests Locally
 
