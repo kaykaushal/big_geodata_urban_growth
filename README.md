@@ -40,6 +40,8 @@ This project has the following structure to a depth of 2.
 
 ## Development
 
+![](https://github.com/kaykaushal/big_geodata_urban_growth/blob/439e59efd9e20028f4e731c347334d72b80ae7d9/Picture%201.png)
+
 Databricks cluster creation and pipeline setup in aws.
 
 ### Running Tests Locally
