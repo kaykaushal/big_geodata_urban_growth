@@ -2,6 +2,8 @@ import streamlit as st
 import leafmap.foliumap as leafmap
 import yaml
 from pathlib import Path
+import pandas as pd
+import rasterio
 
 
 st.set_page_config(layout="wide")
@@ -62,7 +64,6 @@ m.to_streamlit(height=700)
 
 # Load tiff file and 
 @st.cache()
-
 def load_data(area, year):
     # check if file exists
     output_file = f"{area}_{year}.tif"
@@ -85,6 +86,16 @@ image = load_data(selectbox_city, selectbox_year)
 
 st.write('Selected image path:', image)
 
+# get dataframe from .tif
+@st.cache()
+def get_dataframe(file_path):
+    with rasterio.open(str(file_path)) as src:
+        data = src.read()
+    df = pd.DataFrame(data.reshape(data.shape[0], -1).T, columns=['blue','green','red','nir','swir1','swir2'])
+    df = df.dropna()
+    return df 
+
+# Plot raster 
 with st.expander("See source code"):
     with st.echo():
         m1 = leafmap.Map()
@@ -96,3 +107,6 @@ with st.expander("See source code"):
         #m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
 
 m1.to_streamlit(height=700)
+
+df = get_dataframe(image)
+st.write(df.describe())
