@@ -1,2 +1,9 @@
+--find-links=https://girder.github.io/large_image_wheels GDAL
 streamlit
 pandas
+geemap
+geopandas
+jupyter-server-proxy
+leafmap
+nbserverproxy
+owslib

@@ -1,13 +1,38 @@
-import pandas as pd
 import streamlit as st
+import leafmap.foliumap as leafmap
 
-st.title("Welcome to Streamlit!")
+st.set_page_config(layout="wide")
 
-st.write("Our first DataFrame")
+# Customize the sidebar
+markdown = """
+Template URL: <https://template.streamlit.app>
+GitHub Repository: <https://github.com/giswqs/streamlit-multipage-template>
+"""
 
-st.write(
-  pd.DataFrame({
-      'A': [1, 2, 3, 4],
-      'B': [5, 6, 7, 8]
-    })
+st.sidebar.title("About")
+st.sidebar.info(markdown)
+logo = "https://i.imgur.com/UbOXYAU.png"
+st.sidebar.image(logo)
+
+# Customize page title
+st.title("Streamlit for Geospatial Applications of Urban Growth")
+
+st.markdown(
+    """
+    This is a interactive web apps created using [streamlit](https://streamlit.io) and [leafmap](https://leafmap.org). 
+    """
 )
+
+st.header("Instructions")
+
+markdown = """
+1. For the [GitHub repository](https://github.com/giswqs/streamlit-multipage-template) or [use it as a template](https://github.com/giswqs/streamlit-multipage-template/generate) for your own project.
+2. Customize the sidebar by changing the sidebar text and logo in each Python files.
+3. Find your favorite emoji from https://emojipedia.org.
+4. Add a new app to the `pages/` directory with an emoji in the file name, e.g., `1_🚀_Chart.py`.
+"""
+
+st.markdown(markdown)
+
+m = leafmap.Map(minimap_control=True)
+m.add_basemap("OpenTopoMap")
