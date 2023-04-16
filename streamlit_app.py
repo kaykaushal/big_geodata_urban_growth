@@ -1,5 +1,8 @@
 import streamlit as st
 import leafmap.foliumap as leafmap
+import yaml
+from pathlib import Path
+
 
 st.set_page_config(layout="wide")
 
@@ -8,6 +11,17 @@ markdown = """
 Template URL: <https://template.streamlit.app>
 GitHub Repository: <https://github.com/giswqs/streamlit-multipage-template>
 """
+# Sidebar
+# Create data selector 
+with st.sidebar.form(key="my_form"):
+    selectbox_city = st.selectbox("Choose a city", ["ernakulam", "pune"])
+    selectbox_year = st.selectbox("Select year", [2002, 2012, 2022])
+    selectbox_band = st.multiselect("Select Bands", ['blue','green','red','nir','swir1','swir2'])
+    st.markdown(
+        '<p class="small-font">Results Limited to top 5 per State in overall US</p>',
+        unsafe_allow_html=True,
+    )
+    pressed = st.form_submit_button("Load Image")
 
 st.sidebar.title("About")
 st.sidebar.info(markdown)
@@ -34,5 +48,51 @@ markdown = """
 
 st.markdown(markdown)
 
-m = leafmap.Map(minimap_control=True)
-m.add_basemap("OpenTopoMap")
+
+# LULC worldwide map
+with st.expander("See source code"):
+    with st.echo():
+        m = leafmap.Map()
+        m.split_map(
+            left_layer='ESA WorldCover 2020 S2 FCC', right_layer='ESA WorldCover 2020'
+        )
+        m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
+
+m.to_streamlit(height=700)
+
+# Load tiff file and 
+@st.cache()
+
+def load_data(area, year):
+    # check if file exists
+    output_file = f"{area}_{year}.tif"
+    file_path = Path("download.yml")
+    if file_path.exists():
+        # open file using PyYAML library
+        with open('download.yml') as f:
+            data = yaml.safe_load(f)
+            url = data[area][year]
+            load_url = (url)
+            if output_file in locals():
+              return output_file
+            else:
+              return leafmap.download_file(load_url, output_file, unzip=False)
+
+    else:
+        print("File not found.")
+
+image = load_data(selectbox_city, selectbox_year)
+
+st.write('Selected image path:', image)
+
+with st.expander("See source code"):
+    with st.echo():
+        m1 = leafmap.Map()
+        m1.add_tile_layer(
+        url="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+        name="Google Satellite",
+        attribution="Google",)
+        m1.add_raster(image, bands=[3, 4, 5], layer_name=f'Ernakulum 2022')
+        #m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
+
+m1.to_streamlit(height=700)
