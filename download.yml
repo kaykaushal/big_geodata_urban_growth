@@ -1,20 +1,11 @@
 # google drive link of data
 
 ernakulam:
-  year:
-    - 2002
-    - 2012
-    - 2022
-  data_link:
-    - https://drive.google.com/file/d/1N_xTvZ9syW9QXbkmxrVbU5nNICVFlmXD/view?usp=share_link
-    - https://drive.google.com/file/d/1ghS7CXfjMsWH3288giloY-PPspCaTAaG/view?usp=share_link
-    - https://drive.google.com/file/d/1ghS7CXfjMsWH3288giloY-PPspCaTAaG/view?usp=share_link
+  2002: https://drive.google.com/file/d/1N_xTvZ9syW9QXbkmxrVbU5nNICVFlmXD/view?usp=share_link
+  2012: https://drive.google.com/file/d/1ghS7CXfjMsWH3288giloY-PPspCaTAaG/view?usp=share_link
+  2022: https://drive.google.com/file/d/1uyhvVoqfMaNk-qDiuGyovlKMOjQTln7S/view?usp=share_link
 
-pune:
-  year:
-    - 2002
-    - 2012
-    - 2022
-  data_link:
-    - https://drive.google.com/file/d/1kElTm9pURETIwhGaCb_knt96TuadJCCd/view?usp=share_link
-    - https://drive.google.com/file/d/1kElTm9pURETIwhGaCb_knt96TuadJCCd/view?usp=share_link
+# pune:
+#   2002: https://drive.google.com/file/d/1kElTm9pURETIwhGaCb_knt96TuadJCCd/view?usp=share_link
+#   2012:
+#   2022: 
