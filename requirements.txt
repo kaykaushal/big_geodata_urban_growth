@@ -7,3 +7,7 @@ jupyter-server-proxy
 leafmap
 nbserverproxy
 owslib
+localtileserver 
+ipyleaflet
+PyYAML
+pathlib
