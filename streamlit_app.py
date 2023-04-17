@@ -5,10 +5,12 @@ from pathlib import Path
 import pandas as pd
 import rasterio
 import rasterio.plot
+from rasterio.plot import show_hist
+
 
 # visualization package
 import matplotlib.pyplot as plt
-import plotly.figure_factory as ff
+#import plotly.figure_factory as ff
 
 
 st.set_page_config(layout="wide")
@@ -118,8 +120,9 @@ fig, ax = plt.subplots()
 ax.imshow(raster_data.read(1), cmap='pink')
 st.pyplot(fig)
 
-# Band Frequency
 
-fig = ff.create_distplot([df[c] for c in df.columns], df.columns)
-#show in app
-st.plotly_chart(fig)
+# Band Frequency
+fig, ax = plt.subplots()
+ax.show_hist(src_image, bins=50, lw=0.0, stacked=False, alpha=0.3,
+    histtype='stepfilled', title="Histogram")
+st.pyplot(fig)
