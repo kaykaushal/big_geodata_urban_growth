@@ -123,6 +123,6 @@ st.pyplot(fig)
 
 # Band Frequency
 fig, ax = plt.subplots()
-ax.show_hist(src_image, bins=50, lw=0.0, stacked=False, alpha=0.3,
-    histtype='stepfilled', title="Histogram")
+show_hist(src_image, bins=50, lw=0.0, stacked=False, alpha=0.3,
+    histtype='stepfilled', title="Histogram of Bands")
 st.pyplot(fig)
