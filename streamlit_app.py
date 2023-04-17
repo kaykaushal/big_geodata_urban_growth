@@ -5,6 +5,7 @@ from pathlib import Path
 import pandas as pd
 import rasterio
 import rasterio.plot
+import matplotlib.pyplot as plt
 
 
 st.set_page_config(layout="wide")
@@ -104,9 +105,8 @@ df = get_dataframe(src_image)
 st.write(df.describe())
 
 # visualize 
-with rasterio.open(str(src_image)) as src:
-    raster_data = src.read()
-
-raster_plot = rasterio.plot.show(raster_data, 3)
+raster_data = rasterio.open(str(src_image))
+raster_plot = plt.imshow(raster_data.read(1), cmap='pink')
+#raster_plot = rasterio.plot.show(raster_data, 3)
 # Plot on dashboard
 st.image(raster_plot, caption=f'Raster Image {selectbox_city}-{selectbox_year}')
