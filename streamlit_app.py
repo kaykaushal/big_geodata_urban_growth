@@ -4,7 +4,7 @@ import yaml
 from pathlib import Path
 import pandas as pd
 import rasterio
-import rasterio.plot as show
+import rasterio.plot
 
 
 st.set_page_config(layout="wide")
@@ -105,6 +105,6 @@ st.write(df.describe())
 
 # visualize 
 src = rasterio.open(src_image)
-raster_plot = show(src_image)
+raster_plot = rasterio.plot.show(src_image)
 # Plot on dashboard
 st.image(raster_plot, caption=f'Raster Image {selectbox_city}-{selectbox_year}')
