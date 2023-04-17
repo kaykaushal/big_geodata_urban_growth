@@ -13,3 +13,4 @@ ipyleaflet
 PyYAML
 pathlib
 plotly
+scipy
