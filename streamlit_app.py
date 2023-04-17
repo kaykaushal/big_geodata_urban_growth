@@ -95,12 +95,12 @@ with st.expander("See source code"):
         url="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
         name="Google Satellite",
         attribution="Google",)
-        m1.add_raster(image, bands=[3, 4, 5], layer_name=f'Ernakulum 2022')
+        m1.add_raster(src_image, bands=[3, 4, 5], layer_name=f'Ernakulum 2022')
         #m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
 
 m1.to_streamlit(height=700)
 
-df = get_dataframe(image)
+df = get_dataframe(src_image)
 st.write(df.describe())
 
 # visualize 
