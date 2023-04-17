@@ -129,3 +129,6 @@ for col in df.columns:
 
 # Display the plot in Streamlit
 st.pyplot(fig_hist)
+
+# Combine raster 
+fig, (axrgb, axhist) = plt.subplots(1, 2, figsize=(14,7))
