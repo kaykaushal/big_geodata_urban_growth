@@ -105,6 +105,6 @@ st.write(df.describe())
 
 # visualize 
 src = rasterio.open(str(src_image))
-raster_plot = rasterio.plot.show(src_image)
+raster_plot = rasterio.plot.show(src)
 # Plot on dashboard
 st.image(raster_plot, caption=f'Raster Image {selectbox_city}-{selectbox_year}')
