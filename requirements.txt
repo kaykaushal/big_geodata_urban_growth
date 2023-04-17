@@ -12,5 +12,3 @@ localtileserver
 ipyleaflet
 PyYAML
 pathlib
-plotly
-scipy
