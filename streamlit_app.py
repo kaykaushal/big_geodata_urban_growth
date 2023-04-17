@@ -104,7 +104,9 @@ df = get_dataframe(src_image)
 st.write(df.describe())
 
 # visualize 
-src = rasterio.open(str(src_image))
-raster_plot = rasterio.plot.show(src)
+with rasterio.open(str(src_image)) as src:
+    raster_data = src.read()
+
+raster_plot = rasterio.plot.show(raster_data, 3)
 # Plot on dashboard
 st.image(raster_plot, caption=f'Raster Image {selectbox_city}-{selectbox_year}')
