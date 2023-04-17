@@ -4,6 +4,7 @@ import yaml
 from pathlib import Path
 import pandas as pd
 import rasterio
+import rasterio.plot as show
 
 
 st.set_page_config(layout="wide")
@@ -39,16 +40,7 @@ st.markdown(
     """
 )
 
-st.header("Instructions")
-
-markdown = """
-1. For the [GitHub repository](https://github.com/giswqs/streamlit-multipage-template) or [use it as a template](https://github.com/giswqs/streamlit-multipage-template/generate) for your own project.
-2. Customize the sidebar by changing the sidebar text and logo in each Python files.
-3. Find your favorite emoji from https://emojipedia.org.
-4. Add a new app to the `pages/` directory with an emoji in the file name, e.g., `1_🚀_Chart.py`.
-"""
-
-st.markdown(markdown)
+st.header("Global LULC & FCC Map")
 
 
 # LULC worldwide map
@@ -82,9 +74,9 @@ def load_data(area, year):
     else:
         print("File not found.")
 
-image = load_data(selectbox_city, selectbox_year)
+src_image = load_data(selectbox_city, selectbox_year)
 
-st.write('Selected image path:', image)
+st.write('Selected image path:', src_image)
 
 # get dataframe from .tif
 @st.cache()
@@ -110,3 +102,9 @@ m1.to_streamlit(height=700)
 
 df = get_dataframe(image)
 st.write(df.describe())
+
+# visualize 
+src = rasterio.open(src_image)
+raster_plot = show(src_image)
+# Plot on dashboard
+st.image(raster_plot, caption=f'Raster Image {selectbox_city}-{selectbox_year}')
