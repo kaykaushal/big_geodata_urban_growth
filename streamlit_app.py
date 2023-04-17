@@ -5,12 +5,11 @@ from pathlib import Path
 import pandas as pd
 import rasterio
 import rasterio.plot
-from rasterio.plot import show_hist
+#from rasterio.plot import show_hist
 
 
 # visualization package
 import matplotlib.pyplot as plt
-#import plotly.figure_factory as ff
 
 
 st.set_page_config(layout="wide")
@@ -122,7 +121,13 @@ st.pyplot(fig)
 
 
 # Band Frequency
-fig, ax = plt.subplots()
-show_hist(src_image, bins=50, lw=0.0, stacked=False, alpha=0.3,
-    histtype='stepfilled', title="Histogram of Bands")
-st.pyplot(fig)
+fig_hist, ax_hist = plt.subplots()
+df.plot.kde(ax=ax_hist)
+
+# Add labels and title
+ax.set_xlabel('Bands')
+ax.set_ylabel('Density')
+ax.set_title('Density Plot')
+
+# Display the plot in Streamlit
+st.pyplot(fig_hist)
