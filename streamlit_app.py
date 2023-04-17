@@ -5,7 +5,10 @@ from pathlib import Path
 import pandas as pd
 import rasterio
 import rasterio.plot
+
+# visualization package
 import matplotlib.pyplot as plt
+import plotly.figure_factory as ff
 
 
 st.set_page_config(layout="wide")
@@ -40,6 +43,7 @@ st.markdown(
     This is a interactive web apps created using [streamlit](https://streamlit.io) and [leafmap](https://leafmap.org). 
     """
 )
+
 
 st.header("Global LULC & FCC Map")
 
@@ -98,9 +102,9 @@ with st.expander("See source code"):
         attribution="Google",)
         m1.add_raster(src_image, bands=[3, 4, 5], layer_name=f'Ernakulum 2022')
         #m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
-
 m1.to_streamlit(height=700)
 
+# get dataframe from raster layer
 df = get_dataframe(src_image)
 st.write(df.describe())
 
@@ -113,3 +117,9 @@ raster_data = rasterio.open(str(src_image))
 fig, ax = plt.subplots()
 ax.imshow(raster_data.read(1), cmap='pink')
 st.pyplot(fig)
+
+# Band Frequency
+
+fig = ff.create_distplot([df[c] for c in df.columns], df.columns)
+#show in app
+st.plotly_chart(fig)
