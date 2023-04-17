@@ -61,7 +61,7 @@ with st.expander("See source code"):
 m.to_streamlit(height=700)
 
 # Load tiff file and 
-@st.cache()
+@st.cache_data
 def load_data(area, year):
     # check if file exists
     output_file = f"{area}_{year}.tif"
@@ -85,7 +85,7 @@ src_image = load_data(selectbox_city, selectbox_year)
 st.write('Selected image path:', src_image)
 
 # get dataframe from .tif
-@st.cache()
+@st.cache_data
 def get_dataframe(file_path):
     with rasterio.open(str(file_path)) as src:
         data = src.read()
