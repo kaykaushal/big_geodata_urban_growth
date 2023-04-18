@@ -27,10 +27,10 @@ with st.sidebar.form(key="my_form"):
     selectbox_city = st.selectbox("Choose a city", ["ernakulam", "pune"])
     selectbox_year = st.selectbox("Select year", [2002, 2012, 2022])
     selectbox_band = st.multiselect("Select Bands", ['blue','green','red','nir','swir1','swir2'])
-    st.markdown(
-        '<p class="small-font">Results Limited to top 5 per State in overall US</p>',
-        unsafe_allow_html=True,
-    )
+    # st.markdown(
+    #     '<p class="small-font">Results Limited to top 5 per State in overall US</p>',
+    #     unsafe_allow_html=True,
+    # )
     pressed = st.form_submit_button("Load Image")
 
 st.sidebar.title("About")
