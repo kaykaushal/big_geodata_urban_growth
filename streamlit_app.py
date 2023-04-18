@@ -122,18 +122,7 @@ st.pyplot(fig)
 
 # Band Frequency
 fig_hist, ax_hist = plt.subplots()
-#df.plot.kde(ax=ax_hist)
-# Create a distplot for each variable
 for col in df.columns:
     ax_hist.hist(df[col], alpha=0.5, label=col)
-
-# Display the plot in Streamlit
+ax_hist.legend()  # Add this line to show legend
 st.pyplot(fig_hist)
-
-# Pandas density plot 
-# plot the density plot for each bands
-st.title("Bands Histogram")
-for col in df.columns:
-    fig3, ax3 = plt.subplots()
-    df[col].plot.kde(ax=ax3, legend=True)
-    st.pyplot(fig3)
