@@ -1,5 +1,8 @@
 import streamlit as st
-import leafmap.foliumap as leafmap
+#import leafmap.foliumap as leafmap
+import numpy as np
+import pandas as pd 
+import matplotlib.pyplot as plt 
 
 st.set_page_config(layout="wide")
 
@@ -23,16 +26,27 @@ st.markdown(
     """
 )
 
-st.header("Instructions")
+st.header("Image Exploaration & Analysis")
 
-markdown = """
-1. For the [GitHub repository](https://github.com/giswqs/streamlit-multipage-template) or [use it as a template](https://github.com/giswqs/streamlit-multipage-template/generate) for your own project.
-2. Customize the sidebar by changing the sidebar text and logo in each Python files.
-3. Find your favorite emoji from https://emojipedia.org.
-4. Add a new app to the `pages/` directory with an emoji in the file name, e.g., `1_🚀_Chart.py`.
-"""
 
-st.markdown(markdown)
 
-m = leafmap.Map(minimap_control=True)
-m.add_basemap("OpenTopoMap")
+data = {'col1': [1, 2, 3, 4, 5], 
+        'col2': [6, 7, 8, 9, 10], 
+        'col3': [11, 12, 13, 14, 15]}
+df = pd.DataFrame(data)
+
+st.dataframe(df.describe())
+
+st.title('Band Density Plot')
+# plot the density plot for all columns with legend
+fig, ax = plt.subplots(figsize=(14, 10))
+df.plot.density(ax=ax, legend=True)
+
+data = np.random.randn(10, 1)
+
+col1, col2 = st.columns([1, 1])
+col1.subheader("Bands Discriptive Analysis")
+col1.dataframe(df.describe())
+
+col2.subheader("Bands Density Density Plot")
+col2.pyplot(fig)

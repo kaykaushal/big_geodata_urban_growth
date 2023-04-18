@@ -16,8 +16,9 @@ st.set_page_config(layout="wide")
 
 # Customize the sidebar
 markdown = """
+This app is developement stage with source code at
+GitHub Repository: <https://github.com/kaykaushal/big_geodata_urban_growth.git>
 Template URL: <https://template.streamlit.app>
-GitHub Repository: <https://github.com/giswqs/streamlit-multipage-template>
 """
 # Sidebar
 # Create data selector 
@@ -36,30 +37,15 @@ st.sidebar.info(markdown)
 logo = "https://i.imgur.com/UbOXYAU.png"
 st.sidebar.image(logo)
 
+## Main Page 
 # Customize page title
 st.title("Streamlit for Geospatial Applications of Urban Growth")
-
 st.markdown(
     """
     This is a interactive web apps created using [streamlit](https://streamlit.io) and [leafmap](https://leafmap.org). 
     """
 )
-
-
-st.header("Global LULC & FCC Map")
-
-
-# LULC worldwide map
-with st.expander("See source code"):
-    with st.echo():
-        m = leafmap.Map()
-        m.split_map(
-            left_layer='ESA WorldCover 2020 S2 FCC', right_layer='ESA WorldCover 2020'
-        )
-        m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
-
-m.to_streamlit(height=700)
-
+## Data Collection & Processing 
 # Load tiff file and 
 @st.cache_data
 def load_data(area, year):
@@ -82,8 +68,6 @@ def load_data(area, year):
 
 src_image = load_data(selectbox_city, selectbox_year)
 
-st.write('Selected image path:', src_image)
-
 # get dataframe from .tif
 @st.cache_data
 def get_dataframe(file_path):
@@ -92,6 +76,29 @@ def get_dataframe(file_path):
     df = pd.DataFrame(data.reshape(data.shape[0], -1).T, columns=['blue','green','red','nir','swir1','swir2'])
     df = df.dropna()
     return df 
+
+#st.write('Selected image path:', src_image)
+## Data Exploration and visualization  
+# get dataframe from raster layer
+df = get_dataframe(src_image)
+st.write(df.describe())
+
+# density
+fig_hist, ax_hist = plt.subplots()
+for col in df.columns:
+    ax_hist.hist(df[col], alpha=0.5, label=col)
+ax_hist.legend()  # Add this line to show legend
+st.pyplot(fig_hist)
+
+# Add into one column of main page 
+col1, col2 = st.columns([2, 2])
+col1.subheader("Bands Discriptive Analysis")
+col1.dataframe(df.describe())
+
+col2.subheader("Bands Density Density Plot")
+col2.pyplot(fig_hist)
+
+
 
 # Plot raster 
 with st.expander("See source code"):
@@ -104,10 +111,6 @@ with st.expander("See source code"):
         m1.add_raster(src_image, bands=[3, 4, 5], layer_name=f'Ernakulum 2022')
         #m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
 m1.to_streamlit(height=700)
-
-# get dataframe from raster layer
-df = get_dataframe(src_image)
-st.write(df.describe())
 
 # visualize 
 raster_data = rasterio.open(str(src_image))
@@ -126,3 +129,18 @@ for col in df.columns:
     ax_hist.hist(df[col], alpha=0.5, label=col)
 ax_hist.legend()  # Add this line to show legend
 st.pyplot(fig_hist)
+
+
+st.header("Global LULC & FCC Map")
+
+
+# LULC worldwide map
+with st.expander("See source code"):
+    with st.echo():
+        m = leafmap.Map()
+        m.split_map(
+            left_layer='ESA WorldCover 2020 S2 FCC', right_layer='ESA WorldCover 2020'
+        )
+        m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
+
+m.to_streamlit(height=700)
