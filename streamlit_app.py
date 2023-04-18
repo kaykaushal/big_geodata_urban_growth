@@ -125,7 +125,7 @@ st.pyplot(fig_b)
 # Add into one column of main page 
 col3, col4 = st.columns(2)
 col3.subheader("Box Plots")
-col3.dataframe(df.describe())
+col3.pyplot(fig_b)
 
 col4.subheader("Bands Correlation Heatmap")
 col4.pyplot(fig_c)
@@ -133,6 +133,12 @@ col4.pyplot(fig_c)
 
 
 # # Plot raster 
+m = leafmap.Map()
+m.add_raster(src_image, bands=[5, 4, 3], colormap='terrain', layer_name='All Band')
+
+# display the map in Streamlit
+st.pydeck_chart(m.to_streamlit())
+
 # with st.expander("See source code"):
 #     with st.echo():
 #         m1 = leafmap.Map()
