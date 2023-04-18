@@ -1,5 +1,5 @@
 --find-links=https://girder.github.io/large_image_wheels GDAL
-streamlit
+streamlit==1.21.0
 rasterio
 pandas
 geemap
@@ -12,4 +12,3 @@ localtileserver
 ipyleaflet
 PyYAML
 pathlib
-scipy

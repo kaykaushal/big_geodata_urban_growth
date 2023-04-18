@@ -98,47 +98,47 @@ col2.pyplot(fig_hist)
 
 
 
-# Plot raster 
-with st.expander("See source code"):
-    with st.echo():
-        m1 = leafmap.Map()
-        m1.add_tile_layer(
-        url="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
-        name="Google Satellite",
-        attribution="Google",)
-        m1.add_raster(src_image, bands=[3, 4, 5], layer_name=f'Ernakulum 2022')
-        #m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
-m1.to_streamlit(height=700)
+# # Plot raster 
+# with st.expander("See source code"):
+#     with st.echo():
+#         m1 = leafmap.Map()
+#         m1.add_tile_layer(
+#         url="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+#         name="Google Satellite",
+#         attribution="Google",)
+#         m1.add_raster(src_image, bands=[3, 4, 5], layer_name=f'Ernakulum 2022')
+#         #m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
+# m1.to_streamlit(height=700)
 
-# visualize 
-raster_data = rasterio.open(str(src_image))
-#raster_plot = plt.imshow(raster_data.read(1), cmap='pink')
-#raster_plot = rasterio.plot.show(raster_data, 3)
-# Plot on dashboard
-#st.image(raster_plot, caption=f'Raster Image {selectbox_city}-{selectbox_year}')
-fig, ax = plt.subplots()
-ax.imshow(raster_data.read(1), cmap='pink')
-st.pyplot(fig)
-
-
-# Band Frequency
-fig_hist, ax_hist = plt.subplots()
-for col in df.columns:
-    ax_hist.hist(df[col], alpha=0.5, label=col)
-ax_hist.legend()  # Add this line to show legend
-st.pyplot(fig_hist)
+# # visualize 
+# raster_data = rasterio.open(str(src_image))
+# #raster_plot = plt.imshow(raster_data.read(1), cmap='pink')
+# #raster_plot = rasterio.plot.show(raster_data, 3)
+# # Plot on dashboard
+# #st.image(raster_plot, caption=f'Raster Image {selectbox_city}-{selectbox_year}')
+# fig, ax = plt.subplots()
+# ax.imshow(raster_data.read(1), cmap='pink')
+# st.pyplot(fig)
 
 
-st.header("Global LULC & FCC Map")
+# # Band Frequency
+# fig_hist, ax_hist = plt.subplots()
+# for col in df.columns:
+#     ax_hist.hist(df[col], alpha=0.5, label=col)
+# ax_hist.legend()  # Add this line to show legend
+# st.pyplot(fig_hist)
 
 
-# LULC worldwide map
-with st.expander("See source code"):
-    with st.echo():
-        m = leafmap.Map()
-        m.split_map(
-            left_layer='ESA WorldCover 2020 S2 FCC', right_layer='ESA WorldCover 2020'
-        )
-        m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
+# st.header("Global LULC & FCC Map")
 
-m.to_streamlit(height=700)
+
+# # LULC worldwide map
+# with st.expander("See source code"):
+#     with st.echo():
+#         m = leafmap.Map()
+#         m.split_map(
+#             left_layer='ESA WorldCover 2020 S2 FCC', right_layer='ESA WorldCover 2020'
+#         )
+#         m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
+
+# m.to_streamlit(height=700)
