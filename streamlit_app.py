@@ -81,17 +81,13 @@ def get_dataframe(file_path):
 ## Data Exploration and visualization  
 # get dataframe from raster layer
 df = get_dataframe(src_image)
-st.write(df.describe())
 
 # density
 fig_hist, ax_hist = plt.subplots()
-for col in df.columns:
-    ax_hist.hist(df[col], alpha=0.5, label=col)
-ax_hist.legend()  # Add this line to show legend
-st.pyplot(fig_hist)
+df.plot.density(ax=ax_hist,legend=True)
 
 # Add into one column of main page 
-col1, col2 = st.columns([2, 2])
+col1, col2 = st.columns([1, 3])
 col1.subheader("Bands Discriptive Analysis")
 col1.dataframe(df.describe())
 
