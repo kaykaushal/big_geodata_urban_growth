@@ -83,13 +83,15 @@ def get_dataframe(file_path):
 df = get_dataframe(src_image)
 
 # density
-fig_hist, ax_hist = plt.subplots()
+fig_hist, ax_hist = plt.subplots(figsize=(20, 12))
 for col in df.columns:
-    ax_hist.hist(df[col], alpha=0.5, label=col)
-ax_hist.legend()  # Add this line to show legend
+    ax_hist.hist(df[col], alpha=0.7, label=col)
+ax_hist.legend() # Add this line to show legend
+ax_hist.set_xlabel('pixel value')
+ax_hist.set_title('density')  
 
 # Add into one column of main page 
-col1, col2 = st.columns([1, 2])
+col1, col2 = st.columns(2)
 col1.subheader("Bands Discriptive Analysis")
 col1.dataframe(df.describe())
 

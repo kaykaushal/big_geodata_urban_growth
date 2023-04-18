@@ -39,12 +39,12 @@ st.dataframe(df.describe())
 
 st.title('Band Density Plot')
 # plot the density plot for all columns with legend
-fig, ax = plt.subplots(figsize=(14, 10))
-df.plot.density(ax=ax, legend=True)
+fig, ax = plt.subplots()
+df.plot.density(ax=ax, legend=True, figsize=(20, 10))
 
 data = np.random.randn(10, 1)
 
-col1, col2 = st.columns([1, 1])
+col1, col2 = st.columns(2)
 col1.subheader("Bands Discriptive Analysis")
 col1.dataframe(df.describe())
 
