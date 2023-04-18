@@ -130,5 +130,10 @@ for col in df.columns:
 # Display the plot in Streamlit
 st.pyplot(fig_hist)
 
-# Combine raster 
-fig, (axrgb, axhist) = plt.subplots(1, 2, figsize=(14,7))
+# Pandas density plot 
+# plot the density plot for each bands
+st.title("Bands Histogram")
+for col in df.columns:
+    fig3, ax3 = plt.subplots()
+    df[col].plot.kde(ax=ax3, legend=True)
+    st.pyplot(fig3)
