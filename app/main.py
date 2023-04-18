@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt 
+import seaborn as sns
 
 st.set_page_config(layout="wide")
 
@@ -50,3 +51,36 @@ col1.dataframe(df.describe())
 
 col2.subheader("Bands Density Density Plot")
 col2.pyplot(fig)
+
+
+data = {'column1': np.random.normal(0, 1, 100), 
+        'column2': np.random.normal(1, 2, 100), 
+        'column3': np.random.normal(-1, 0.5, 100),
+        'column4': np.random.normal(2, 1.5, 100)}
+df = pd.DataFrame(data)
+
+# create a figure with a size of 8 inches by 6 inches
+fig_b, ax_b = plt.subplots(figsize=(8, 6))
+
+# create a box plot for each column and add it to the figure
+for col in df.columns:
+    ax_b.boxplot(df[col], positions=[df.columns.get_loc(col)+1], widths=0.6, showfliers=True)
+
+# set the x-axis tick labels to the column names
+ax.set_xticks(range(1, len(df.columns)+1))
+ax.set_xticklabels(df.columns)
+
+# set the y-axis label
+ax.set_ylabel('Pixel Value')
+
+st.pyplot(fig_b)
+
+# create a correlation matrix heaymap
+
+correlations = df.corr()
+fig_c, ax_c = plt.subplots()
+heatmap = sns.heatmap(correlations, vmin=-1, vmax=1, annot=True, cmap='BrBG')
+heatmap.set_title('Band Correlation Heatmap', fontdict={'fontsize':18}, pad=12);
+
+st.pyplot(fig_c)
+

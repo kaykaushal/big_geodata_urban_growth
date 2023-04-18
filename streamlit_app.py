@@ -6,6 +6,7 @@ import pandas as pd
 import rasterio
 import rasterio.plot
 from rasterio.plot import show_hist
+import seaborn as sns
 
 
 # visualization package
@@ -88,7 +89,7 @@ for col in df.columns:
     ax_hist.hist(df[col], alpha=0.7, label=col)
 ax_hist.legend() # Add this line to show legend
 ax_hist.set_xlabel('pixel value')
-ax_hist.set_title('density')  
+ax_hist.set_ylabel('density')  
 
 # Add into one column of main page 
 col1, col2 = st.columns(2)
@@ -97,6 +98,37 @@ col1.dataframe(df.describe())
 
 col2.subheader("Bands Density Density Plot")
 col2.pyplot(fig_hist)
+
+## Layout 2 Visualization 
+
+# create a figure with a size of 8 inches by 6 inches
+fig_b, ax_b = plt.subplots(figsize=(8, 6))
+# create a box plot for each column and add it to the figure
+for col in df.columns:
+    ax_b.boxplot(df[col], positions=[df.columns.get_loc(col)+1], widths=0.6, showfliers=True)
+# set the x-axis tick labels to the column names
+ax_b.set_xticks(range(1, len(df.columns)+1))
+ax_b.set_xticklabels(df.columns)
+# set the y-axis label
+ax_b.set_ylabel('Pixel Value')
+
+#st.pyplot(fig_b)
+# create a correlation matrix heaymap
+
+correlations = df.corr()
+fig_c, ax_c = plt.subplots()
+heatmap = sns.heatmap(correlations, vmin=-1, vmax=1, annot=True, cmap='BrBG')
+heatmap.set_title('Band Correlation Heatmap', fontdict={'fontsize':18}, pad=12);
+
+st.pyplot(fig_b)
+
+# Add into one column of main page 
+col3, col4 = st.columns(2)
+col3.subheader("Box Plots")
+col3.dataframe(df.describe())
+
+col4.subheader("Bands Correlation Heatmap")
+col4.pyplot(fig_c)
 
 
 
