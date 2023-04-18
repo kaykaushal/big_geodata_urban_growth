@@ -120,8 +120,6 @@ fig_c, ax_c = plt.subplots()
 heatmap = sns.heatmap(correlations, vmin=-1, vmax=1, annot=True, cmap='BrBG')
 heatmap.set_title('Band Correlation Heatmap', fontdict={'fontsize':18}, pad=12);
 
-st.pyplot(fig_b)
-
 # Add into one column of main page 
 col3, col4 = st.columns(2)
 col3.subheader("Box Plots")
