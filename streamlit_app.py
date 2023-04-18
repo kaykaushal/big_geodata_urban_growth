@@ -83,7 +83,7 @@ def get_dataframe(file_path):
 df = get_dataframe(src_image)
 
 # density
-fig_hist, ax_hist = plt.subplots(figsize=(20, 12))
+fig_hist, ax_hist = plt.subplots(figsize=(10, 8))
 for col in df.columns:
     ax_hist.hist(df[col], alpha=0.7, label=col)
 ax_hist.legend() # Add this line to show legend
