@@ -131,11 +131,20 @@ col4.pyplot(fig_c)
 
 
 # # Plot raster 
-m = leafmap.Map()
-m.add_raster(src_image, bands=[5, 4, 3], colormap='terrain', layer_name='All Band')
+m_band = leafmap.Map()
+m_band.add_raster(src_image, bands=[5, 4, 3], colormap='terrain', layer_name='All Band')
+m_band.to_streamlit(height=600)
+
 
 # display the map in Streamlit
 st.pydeck_chart(m.to_streamlit())
+
+# Model expander 
+with st.expander("Expand for image class model"):
+    if st.button('Predict'):
+        st.write('Class prediction for loaded image!')
+
+
 
 # with st.expander("See source code"):
 #     with st.echo():
