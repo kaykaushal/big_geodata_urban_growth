@@ -67,6 +67,7 @@ def load_data(area, year):
     else:
         print("File not found.")
 
+# get path of selected city and year
 src_image = load_data(selectbox_city, selectbox_year)
 
 # get dataframe from .tif
