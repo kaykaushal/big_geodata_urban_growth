@@ -173,20 +173,6 @@ with st.expander("Expand for image class model"):
 # st.pyplot(fig_hist)
 
 
-# st.header("Global LULC & FCC Map")
-
-st.header('Validation Map Gloabal ESA LULC')
-# LULC worldwide map
-with st.expander("See source code"):
-    with st.echo():
-        m = leafmap.Map()
-        m.split_map(
-            left_layer='ESA WorldCover 2020 S2 FCC', right_layer='ESA WorldCover 2020'
-        )
-        m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
-
-m.to_streamlit(height=700)
-
 # Model histogram 
 # Data Load
 result_path = src_image = load_data("result", selectbox_year)
@@ -200,3 +186,21 @@ ax_hr.set_xlabel('pixel value')
 ax_hr.set_ylabel('density')  
 
 st.pyplot(fig_hr)
+
+
+# st.header("Global LULC & FCC Map"
+
+
+st.header('Validation Map Gloabal ESA LULC')
+# LULC worldwide map
+with st.expander("See source code"):
+    with st.echo():
+        m = leafmap.Map()
+        m.split_map(
+            left_layer='ESA WorldCover 2020 S2 FCC', right_layer='ESA WorldCover 2020'
+        )
+        m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
+
+m.to_streamlit(height=700)
+
+
