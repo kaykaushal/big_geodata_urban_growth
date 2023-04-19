@@ -131,6 +131,7 @@ col4.pyplot(fig_c)
 
 
 # # Plot raster 
+st.header("Raster Image Map")
 m_band = leafmap.Map()
 m_band.add_raster(src_image, bands=[5, 4, 3], colormap='terrain', layer_name='All Band')
 m_band.to_streamlit(height=600)
@@ -174,14 +175,14 @@ with st.expander("Expand for image class model"):
 
 # st.header("Global LULC & FCC Map")
 
+st.header('Validation Map Gloabal ESA LULC')
+# LULC worldwide map
+with st.expander("See source code"):
+    with st.echo():
+        m = leafmap.Map()
+        m.split_map(
+            left_layer='ESA WorldCover 2020 S2 FCC', right_layer='ESA WorldCover 2020'
+        )
+        m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
 
-# # LULC worldwide map
-# with st.expander("See source code"):
-#     with st.echo():
-#         m = leafmap.Map()
-#         m.split_map(
-#             left_layer='ESA WorldCover 2020 S2 FCC', right_layer='ESA WorldCover 2020'
-#         )
-#         m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
-
-# m.to_streamlit(height=700)
+m.to_streamlit(height=700)
