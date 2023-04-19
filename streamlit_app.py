@@ -186,3 +186,17 @@ with st.expander("See source code"):
         m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
 
 m.to_streamlit(height=700)
+
+# Model histogram 
+# Data Load
+result_path = src_image = load_data("result", selectbox_year)
+result_df = get_dataframe(result_path)
+# density plot 
+fig_hr, ax_hr = plt.subplots(figsize=(10, 8))
+for col in result_df.columns:
+    ax_hr.hist(result_df[col], alpha=0.7, label=col)
+ax_hr.legend() # Add this line to show legend
+ax_hr.set_xlabel('pixel value')
+ax_hr.set_ylabel('density')  
+
+st.pyplot(fig_hr)
