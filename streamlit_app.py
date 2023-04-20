@@ -119,7 +119,7 @@ ax_b.set_ylabel('Pixel Value')
 correlations = df.corr()
 fig_c, ax_c = plt.subplots()
 heatmap = sns.heatmap(correlations, vmin=-1, vmax=1, annot=True, cmap='BrBG')
-heatmap.set_title('Band Correlation Heatmap', fontdict={'fontsize':18}, pad=12);
+#heatmap.set_title('Band Correlation Heatmap', fontdict={'fontsize':18}, pad=12);
 
 # Add into one column of main page 
 col3, col4 = st.columns(2)
@@ -137,10 +137,43 @@ m_band = leafmap.Map()
 m_band.add_raster(src_image, bands=[5, 4, 3], colormap='terrain', layer_name='All Band')
 m_band.to_streamlit(height=600)
 
+
+# Model histogram 
+# Data Load
+result_path = src_image = load_data("result", selectbox_year)
+result_df = get_dataframe(result_path)
+# density plot 
+fig_hr, ax_hr = plt.subplots(figsize=(10, 8))
+for col in result_df.columns:
+    ax_hr.hist(result_df[col], alpha=0.7, label=col)
+ax_hr.legend() # Add this line to show legend
+ax_hr.set_xlabel('pixel value')
+ax_hr.set_ylabel('density')  
+
+
+
 # Model expander 
 with st.expander("Expand for image class model"):
-    if st.button('Predict'):
+    if st.button('Classification'):
         st.write('Class prediction for loaded image!')
+        st.pyplot(fig_hr)
+
+
+
+
+# st.header("Global LULC & FCC Map"
+
+st.header('Validation Map Gloabal ESA LULC')
+# LULC worldwide map
+with st.expander("See source code"):
+    with st.echo():
+        m = leafmap.Map()
+        m.split_map(
+            left_layer='ESA WorldCover 2020 S2 FCC', right_layer='ESA WorldCover 2020'
+        )
+        m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
+
+m.to_streamlit(height=700)
 
 
 
@@ -172,36 +205,3 @@ with st.expander("Expand for image class model"):
 #     ax_hist.hist(df[col], alpha=0.5, label=col)
 # ax_hist.legend()  # Add this line to show legend
 # st.pyplot(fig_hist)
-
-
-# Model histogram 
-# Data Load
-result_path = src_image = load_data("result", selectbox_year)
-result_df = get_dataframe(result_path)
-# density plot 
-fig_hr, ax_hr = plt.subplots(figsize=(10, 8))
-for col in result_df.columns:
-    ax_hr.hist(result_df[col], alpha=0.7, label=col)
-ax_hr.legend() # Add this line to show legend
-ax_hr.set_xlabel('pixel value')
-ax_hr.set_ylabel('density')  
-
-st.pyplot(fig_hr)
-
-
-# st.header("Global LULC & FCC Map"
-
-
-st.header('Validation Map Gloabal ESA LULC')
-# LULC worldwide map
-with st.expander("See source code"):
-    with st.echo():
-        m = leafmap.Map()
-        m.split_map(
-            left_layer='ESA WorldCover 2020 S2 FCC', right_layer='ESA WorldCover 2020'
-        )
-        m.add_legend(title='ESA Land Cover', builtin_legend='ESA_WorldCover')
-
-m.to_streamlit(height=700)
-
-
